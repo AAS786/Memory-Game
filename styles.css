@@ -11,11 +11,55 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  font-family: 'Concert One', cursive;
 }
 
 body {
   font-family: 'Concert One', 'Coda', san-serif, cursive;
   background-color: #6d5e6e;
+  background-image: url('memory-game.png'); /* Replace with your image URL */
+  background-size: cover; /* Ensures the image covers the entire background */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  text-align: center;
+  color: black; /
+  font-size: 18px; /* Increased font size */
+}
+.welcome-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #0dd0f7;
+  text-align: center;
+  background-image: url('memory-game.png'); /* Replace with your image URL */
+  background-size: cover; /* Ensures the image covers the entire background */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  text-align: center;
+  color: white; /
+}
+
+.welcome-page h1 {
+  font-size: 5.5rem;
+  margin-bottom: 20px;
+  color: #eb07e4;
+}
+
+.start-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 3.2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.start-button:hover {
+  background-color: #218838;
 }
 
 
@@ -24,17 +68,22 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  min-height: 100vh; /* Ensures the container fills the viewport */
+  text-align: center; /* Optional: Centers text within the container */
 }
 
 .score-table {
   text-align: left;
   width: 500px;
   padding: 0;
-  margin: 0;
+  margin: 10px 0;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+}
+.score-table {
+  margin: 0 auto; /* Centers the deck horizontally */
 }
 
 .stars {
@@ -45,21 +94,35 @@ body {
 .restart {
   cursor: pointer;
 }
+.hidden {
+    display: none;
+}
+
+.card img {
+    width: 100%; /* Adjust the width to fit the card size */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 5px; /* Optional: add rounded corners */
+    
+}
+
 
 .deck {
   background: linear-gradient(135deg, rgba(207, 197, 229, 1) 0%, rgba(163, 154, 204, 1) 36%, rgba(79, 71, 169, 1) 100%);
-  margin: 0;
-  width: 612px;
+  width: 905px;
   min-height: 500px;
   box-shadow: 10px 9px 31px 1px rgba(0, 0, 0, 0.75);
   border-radius: 10px;
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
   padding: 20px;
-  margin-bottom: 15px;
-  align-items: center;
+  margin: 10px 0; /* Add some space between the deck and other elements */
+  display: grid;
+  grid-template-columns: repeat(6, auto);
+  grid-template-rows: repeat(5, auto);
+  gap: 10px;
 }
+.deck {
+  margin: 0 auto; /* Centers the deck horizontally */
+}
+
 
 .card {
   transform: rotateY(0);
@@ -77,6 +140,12 @@ body {
   margin-top: 15px;
   cursor: pointer;
   position: relative;
+  background-image: url('red-playing.jpg'); /* Replace with your image URL */
+  background-size: cover; /* Ensures the image covers the entire background */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  text-align: center;
+  color: white; /
 }
 .card::before {
   content: "❤️";
@@ -87,10 +156,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  backface-visibility: hidden;
 }
 /* When the card is flipped, hide the question mark */
 .card.show::before {
   display: none;
+  transform: rotateY(180deg); /* Flips the card */
+  
 }
 
 .show {
@@ -212,4 +284,23 @@ body {
   .score-table {
       width: 320px;
   }
+}
+
+
+
+.card img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  backface-visibility: hidden; /* Hides the image on the front */
+  transform: rotateY(180deg); /* Rotates the back content */
+}
+
+/* Ensure the card's back matches when flipped */
+.show img {
+  backface-visibility: visible;
 }
