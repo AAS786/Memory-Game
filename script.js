@@ -11,6 +11,17 @@ function shuffle(array) {
 
   return array;
 }
+document.addEventListener("DOMContentLoaded", () => {
+  const welcomePage = document.querySelector(".welcome-page");
+  const gameContainer = document.querySelector(".container");
+  const startButton = document.querySelector(".start-button");
+
+  startButton.addEventListener("click", () => {
+      welcomePage.style.display = "none"; // Hide the welcome page
+      gameContainer.style.display = "block"; // Show the game container
+  });
+});
+
 
 const modal = document.querySelector(".modal");
 const closeButton = document.querySelector(".close-button");
@@ -29,8 +40,47 @@ closeButton.addEventListener("click", toggleModal);
 window.addEventListener("click", windowOnClick);
 
 let cardTest = [];
-let cards = ["diamond", "diamond", "plane", "plane", "anchor", "anchor", "bolt", "bolt", "leaf", "leaf"
-  , "bicycle", "bicycle", "cube", "cube", "bomb", "bomb"];
+let cards = [
+  "apple-fruit-100", "apple-fruit-100",
+  "banana-100", "banana-100",
+  "birthday-cake-100", "birthday-cake-100",
+  "black-jaguar-100", "black-jaguar-100",
+  "blueberry-100", "blueberry-100",
+  "bread-100", "bread-100",
+  "broccoli-100", "broccoli-100",
+  "butterfly-100", "butterfly-100",
+  "cheese-100", "cheese-100",
+  "cherry-100", "cherry-100",
+  "chili-pepper-100", "chili-pepper-100",
+  "chocolate-bar-100", "chocolate-bar-100",
+  "citrus-100", "citrus-100",
+  "coffee-100", "coffee-100",
+  "crab-100", "crab-100",
+  // "cute-pumpkin-100", "cute-pumpkin-100",
+  // "doughnut-100", "doughnut-100",
+  // "french-fries-100", "french-fries-100",
+  // "gingerbread-house-100", "gingerbread-house-100",
+  // "globe-100", "globe-100",
+  // "grapes-100", "grapes-100",
+  // "hot-dog-100", "hot-dog-100",
+  // "ice-cream-sundae-100", "ice-cream-sundae-100",
+  // "ingredients-100", "ingredients-100",
+  // "mushroom-100", "mushroom-100",
+  // "orange-100", "orange-100",
+  // "panda-100", "panda-100",
+  // "pear-100", "pear-100",
+  // "pelican-100", "pelican-100",
+  // "pineapple-100", "pineapple-100",
+  // "pizza-100", "pizza-100",
+  // "raspberry-100", "raspberry-100",
+  // "sandwich-100", "sandwich-100",
+  // "shark-100", "shark-100",
+  // "strawberry-100", "strawberry-100",
+  // "watermelon-100", "watermelon-100",
+  // "wine-bar-100", "wine-bar-100",
+  // "wrap-100", "wrap-100"
+];
+
 
 let shuffledCards = shuffle(cards);
 
@@ -42,20 +92,18 @@ function createCards() {
       // Create a span element for the "?" symbol
       const questionMark = document.createElement("span");
       questionMark.classList.add("question-mark");
-      questionMark.textContent = "?"; // Set "?" on the front of the card
+      questionMark.textContent = "❤️"; // Set "?" on the front of the card
 
-      const i = document.createElement("i");
-      i.classList.toggle("fa");
-      if (card === "plane") {
-          i.classList.toggle("fa-paper-plane-o");
-      } else {
-          i.classList.toggle("fa-" + card);
-      }
+      // Create an img element for the card image
+      const img = document.createElement("img");
+      img.src = `images/${card}.png`; // Image path for the card
+      img.alt = card; // Set alternative text for accessibility
+      img.classList.add("hidden"); // Initially hide the image
 
       const deck = document.querySelector('.deck');
-      li.appendChild(questionMark);  // Append "?" symbol first
-      li.appendChild(i);  // Then append the icon (back of the card)
-      deck.appendChild(li);
+        li.appendChild(questionMark); // Append the "?" symbol first
+        li.appendChild(img); // Then append the image (back of the card)
+        deck.appendChild(li);
   }
 }
 
@@ -86,13 +134,21 @@ function initGame() {
 }
 
 function showCard(card) {
-  card.classList.add('show');
-  // Remove the question mark when the card is flipped
-  const questionMark = card.querySelector('.question-mark');
-  if (questionMark) {
-    questionMark.style.display = 'none';  // Hide the "?" symbol
-  }
+    card.classList.add('show');
+
+    // Remove the question mark when the card is flipped
+    const questionMark = card.querySelector('.question-mark');
+    if (questionMark) {
+        questionMark.style.display = 'none'; // Hide the "?" symbol
+    }
+
+    // Show the image
+    const img = card.querySelector('img');
+    if (img) {
+        img.classList.remove('hidden');
+    }
 }
+
 
 function addCard(card, cardHTML, testList, pos) {
   if (isRestart) {
@@ -121,7 +177,7 @@ function cardsMatch(card1, card2) {
   card1.classList.add('match');
   card2.classList.add('match');
   match++;
-  if (match === 8) {
+  if (match === 15) {
       win();
   }
 }
@@ -152,17 +208,17 @@ function win() {
 function updateMoveCounter() {
   movesCounter++;
   moves.textContent = "Moves: " + movesCounter;
-  if (movesCounter === 13) {
+  if (movesCounter === 24) {
       let star = document.querySelector("#star3");
       star.classList.toggle("fa-star");
       star.classList.add("fa-star-o");
       stars--;
-  } else if (movesCounter === 25) {
+  } else if (movesCounter === 45) {
       let star = document.querySelector("#star2");
       star.classList.toggle("fa-star");
       star.classList.add("fa-star-o");
       stars--;
-  } else if (movesCounter === 35) {
+  } else if (movesCounter === 70) {
       let star = document.querySelector("#star1");
       star.classList.toggle("fa-star");
       star.classList.add("fa-star-o");
