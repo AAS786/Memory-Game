@@ -63,6 +63,7 @@ body {
 }
 
 
+
 .container {
   display: flex;
   justify-content: center;
@@ -108,14 +109,14 @@ body {
 
 .deck {
   background: linear-gradient(135deg, rgba(207, 197, 229, 1) 0%, rgba(163, 154, 204, 1) 36%, rgba(79, 71, 169, 1) 100%);
-  width: 905px;
+  width: 1125px;
   min-height: 500px;
   box-shadow: 10px 9px 31px 1px rgba(0, 0, 0, 0.75);
   border-radius: 10px;
   padding: 20px;
   margin: 10px 0; /* Add some space between the deck and other elements */
   display: grid;
-  grid-template-columns: repeat(6, auto);
+  grid-template-columns: repeat(8, auto);
   grid-template-rows: repeat(5, auto);
   gap: 10px;
 }
@@ -202,7 +203,7 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgb(241, 241, 241);
+  background-color: rgba(241, 241, 241, 0.781);
   padding: 1rem 1.5rem;
   width: 35rem;
   border-radius: 0.5rem;
@@ -235,6 +236,11 @@ body {
   font-size: 60px;
   margin-left: 35px;
 }
+.cross {
+  color: rgba(243, 15, 15, 0.804);
+  font-size: 60px;
+  margin-left: 35px;
+}
 
 .modal-heading {
   letter-spacing: 2px;
@@ -254,6 +260,35 @@ body {
   cursor: pointer;
   margin-top: 25px;
 }
+.modal-content {
+  position: relative; /* Needed for positioning the close button */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 200px; /* Adjust height as needed */
+}
+.close-button {
+  position: absolute; /* Position independently of flexbox layout */
+  top: 10px; /* Distance from the top of the modal */
+  right: 10px; /* Distance from the right side of the modal */
+  font-size: 1.5em;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.retry-game {
+  background: rgb(75, 189, 0);
+  color: #fff;
+  border: 0;
+  padding: 1em 2em;
+  font-size: 1.2em;
+  cursor: pointer;
+  margin-top: 25px;
+}
+
 
 @media screen and (max-width: 600px) {
   .deck {
@@ -275,6 +310,19 @@ body {
       font-size: 45px;
       margin-left: 25px;
   }
+  .cross {
+    color: red; /* Red color for the cross */
+    font-size: 45px; /* Adjust size as needed */
+    margin-bottom: 25px; /* Add spacing if necessary */
+  }
+  .modal-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+    text-align: center;
+  }
+
+
   h1 {
       font-size: 40px;
   }
