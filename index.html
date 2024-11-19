@@ -46,7 +46,7 @@
         </main>
 
         <div class="modal">
-            <div class="modal-content">
+            <div class="modal-content win-modal">
                 <span class="close-button">x</span>
                 <i class="fa fa-check-circle tick"></i>
                 <h1 class="modal-heading">Congratulations! You Won!!</h1>
@@ -54,7 +54,16 @@
                 <button class="new-game">Play Again!</button>
             </div>
         </div>
-    </div>
+        <div class="modal" id="game-modal">
+            <div class="modal-content">
+                <span class="close-button">x</span>
+                <i class="fa fa-times-circle cross"></i>
+                <h1 id="modal-heading">Oops! You Lost!!</h1>
+                <h3 id="stats"></h3>
+                <button class="retry-game">Try Again!</button>
+            </div>
+        </div>
+        
     <script src="script.js"></script>
 </body>
 </html>
