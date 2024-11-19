@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
 const modal = document.querySelector(".modal");
 const closeButton = document.querySelector(".close-button");
 
+
 function toggleModal() {
   modal.classList.toggle("show-modal");
 }
@@ -56,9 +57,9 @@ let cards = [
   "citrus-100", "citrus-100",
   "coffee-100", "coffee-100",
   "crab-100", "crab-100",
-  // "cute-pumpkin-100", "cute-pumpkin-100",
-  // "doughnut-100", "doughnut-100",
-  // "french-fries-100", "french-fries-100",
+  "cute-pumpkin-100", "cute-pumpkin-100",
+  "doughnut-100", "doughnut-100",
+  "french-fries-100", "french-fries-100",
   // "gingerbread-house-100", "gingerbread-house-100",
   // "globe-100", "globe-100",
   // "grapes-100", "grapes-100",
@@ -73,8 +74,8 @@ let cards = [
   // "pineapple-100", "pineapple-100",
   // "pizza-100", "pizza-100",
   // "raspberry-100", "raspberry-100",
-  // "sandwich-100", "sandwich-100",
-  // "shark-100", "shark-100",
+  "sandwich-100", "sandwich-100",
+  "shark-100", "shark-100",
   // "strawberry-100", "strawberry-100",
   // "watermelon-100", "watermelon-100",
   // "wine-bar-100", "wine-bar-100",
@@ -177,7 +178,7 @@ function cardsMatch(card1, card2) {
   card1.classList.add('match');
   card2.classList.add('match');
   match++;
-  if (match === 15) {
+  if (match === 20) {
       win();
   }
 }
@@ -208,23 +209,81 @@ function win() {
 function updateMoveCounter() {
   movesCounter++;
   moves.textContent = "Moves: " + movesCounter;
-  if (movesCounter === 24) {
+
+  // Adjust thresholds based on 40 cards
+  if (movesCounter === 40) { // First star is lost after 35 moves
       let star = document.querySelector("#star3");
       star.classList.toggle("fa-star");
       star.classList.add("fa-star-o");
       stars--;
-  } else if (movesCounter === 45) {
+  } else if (movesCounter === 55) { // Second star is lost after 55 moves
       let star = document.querySelector("#star2");
       star.classList.toggle("fa-star");
       star.classList.add("fa-star-o");
       stars--;
-  } else if (movesCounter === 70) {
+  } else if (movesCounter === 65) { // Third star is lost after 65 moves
       let star = document.querySelector("#star1");
       star.classList.toggle("fa-star");
       star.classList.add("fa-star-o");
       stars--;
   }
+
+  // Check if all stars are lost
+  if (stars === 0) {
+      gameOver(); // Trigger the game-over function
+  }
 }
+
+
+
+function gameOver() {
+  clearInterval(timerID); // Stop the timer when the game is over
+
+  const modal = document.querySelector("#game-modal"); // Get the modal for losing
+  modal.classList.add("show-modal"); // Display the modal
+  
+  const stats = document.querySelector("#stats"); // Get the stats element inside the modal
+  stats.textContent = "Better luck next time! Would you like to try again?"; // Display loss message
+
+  const retrygamebutton = document.querySelector(".retry-game"); // Get the "Try Again!" button
+  retrygamebutton.style.display = "block"; // Ensure the button is visible
+  retrygamebutton.addEventListener("click", resetGame); // Add an event listener to reset the game
+
+  const closeButton = document.querySelector(".close-button"); // Get the close button
+
+  // Add an event listener to the close button
+  closeButton.addEventListener("click", () => {
+    modal.classList.remove("show-modal"); // Close the modal when 'x' is clicked
+  });
+}
+
+// Reset game logic
+function resetGame() {
+  // Hide the modal
+  const modal = document.querySelector("#game-modal");
+  modal.classList.remove("show-modal"); // Hide the modal when the user tries again
+  
+  // Reset or reload the game logic here
+  location.reload(); // Reload the page to start a fresh game
+}
+
+function win() {
+  if (stars === 0) return; // Do not trigger win if stars are zero
+
+  clearInterval(timerID);
+  toggleModal();
+  const stats = document.querySelector(".stats");
+  if (s % 60 < 10) {
+      stats.textContent = "You won with: " + stars + " stars in " + movesCounter + " moves with time: " + m + ":0" + s % 60;
+  } else {
+      stats.textContent = "You won with: " + stars + " stars in " + movesCounter + " moves with time: " + m + ":" + s % 60;
+  }
+}
+
+
+
+
+
 
 let s = 0; 
 let m = 0; 
