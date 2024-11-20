@@ -211,7 +211,7 @@ function updateMoveCounter() {
   moves.textContent = "Moves: " + movesCounter;
 
   // Adjust thresholds based on 40 cards
-  if (movesCounter === 40) { // First star is lost after 35 moves
+  if (movesCounter === 45) { // First star is lost after 35 moves
       let star = document.querySelector("#star3");
       star.classList.toggle("fa-star");
       star.classList.add("fa-star-o");
@@ -279,11 +279,6 @@ function win() {
       stats.textContent = "You won with: " + stars + " stars in " + movesCounter + " moves with time: " + m + ":" + s % 60;
   }
 }
-
-
-
-
-
 
 let s = 0; 
 let m = 0; 
